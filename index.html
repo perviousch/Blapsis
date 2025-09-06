@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLAPSIS — look up</title>
 
-  <!-- Favicons (expects files in the root) -->
+  <!-- Favicons from root -->
   <link rel="icon" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
   <meta name="theme-color" content="#000000"/>
@@ -19,7 +19,7 @@
       --secondary:#010941;   /* deep navy */
       --accent:#000344;      /* dark indigo */
       --bg:#ffffff;          /* white */
-      --muted:#6b7280;
+      --muted:#6b7280;       /* gray */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -31,66 +31,106 @@
 
     /* Header */
     .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px); background:rgba(255,255,255,.9); border-bottom:1px solid rgba(0,0,0,.06)}
-    .nav-inner{max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between}
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit}
-    .brand img.logo{width:42px; height:42px; border-radius:12px; object-fit:cover}
-    .mark{width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg,var(--secondary),var(--accent)); color:#fff; font-weight:800; letter-spacing:.5px}
+    .nav-inner{max-width:1200px; margin:auto; padding:12px 18px; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; overflow:hidden}
+    .brand img.logo{width:44px; height:44px; border-radius:10px; object-fit:cover; flex:0 0 44px}
+    .mark{width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg,var(--secondary),var(--accent)); color:#fff; font-weight:800; letter-spacing:.5px}
     .wordmark{font-family:"Playfair Display", serif; font-size:22px; letter-spacing:.08em}
     .tag{font-size:12px; color:var(--muted); margin-top:2px}
-    .nav a.cta{padding:10px 16px; border-radius:999px; text-decoration:none; font-weight:600; border:1px solid var(--secondary); color:#fff; background:var(--secondary); transition:.25s ease}
-    .nav a.cta:hover{transform:translateY(-1px); box-shadow:0 6px 22px rgba(0,0,0,.15)}
+    .nav-actions{display:flex; gap:10px; align-items:center}
+    .btn{padding:10px 14px; border-radius:12px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:.25s ease; border:1px solid #e5e7eb; background:#fff; color:var(--secondary)}
+    .btn.primary{background:var(--secondary); color:#fff; border-color:var(--secondary)}
+    .btn:hover{transform:translateY(-1px)}
+    .search{display:flex; align-items:center; gap:8px; border:1px solid #e5e7eb; padding:8px 10px; border-radius:12px; background:#fff; min-width:180px}
+    .search input{border:0; outline:0; width:160px; font:inherit}
 
-    /* Hero */
-    .hero{max-width:1200px; margin:48px auto 28px; padding:0 20px; display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
+    /* Social section */
+    .social-wrap{max-width:1200px; margin:12px auto 10px; padding:0 18px 6px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .handle{color:var(--muted); font-size:13px}
+    .social{display:flex; gap:10px}
+    .social a{width:38px; height:38px; border-radius:999px; display:grid; place-items:center; text-decoration:none; border:1px solid #e5e7eb; color:var(--secondary); transition:.2s ease; background:#fff}
+    .social a:hover{transform:translateY(-2px); box-shadow:0 8px 14px rgba(0,0,0,.08)}
+
+    /* Hero (minimal) */
+    .hero{max-width:1200px; margin:26px auto 16px; padding:0 18px; display:grid; grid-template-columns:1.1fr .9fr; gap:22px; align-items:center}
     .h-kicker{color:var(--secondary); font-weight:600; letter-spacing:.18em; text-transform:uppercase; font-size:12px}
-    .h-title{font-family:"Playfair Display", serif; font-size:clamp(36px,6vw,64px); line-height:1.05; margin:10px 0 14px}
+    .h-title{font-family:"Playfair Display", serif; font-size:clamp(34px,6vw,62px); line-height:1.05; margin:6px 0 10px}
     .h-sub{color:#111; max-width:48ch}
-    .h-actions{display:flex; gap:12px; margin-top:18px}
-    .btn{padding:12px 18px; border-radius:12px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:.25s ease; border:1px solid #e5e7eb}
-    .btn.primary{background:var(--primary); color:#fff; border-color:var(--primary)}
-    .btn.primary:hover{transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.18)}
-    .btn.ghost{background:#fff; color:var(--secondary); border-color:var(--secondary)}
-    .btn.ghost:hover{background:linear-gradient(135deg,rgba(1,9,65,.06),rgba(0,3,68,.06))}
-    .hero-visual{aspect-ratio:5/4; border-radius:24px; overflow:hidden; position:relative; background:linear-gradient(135deg, rgba(1,9,65,.08), rgba(0,3,68,.08))}
-    .hero-visual img{width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.05) saturate(1.05)}
-    .badge{position:absolute; right:16px; bottom:16px; background:#fff; color:var(--secondary); padding:8px 12px; border-radius:999px; border:1px solid #e5e7eb; font-size:12px; font-weight:600}
+    .hero-visual{aspect-ratio:5/4; border-radius:22px; overflow:hidden; position:relative; background:linear-gradient(135deg, rgba(1,9,65,.08), rgba(0,3,68,.08))}
+    .hero-visual img{width:100%; height:100%; object-fit:cover; display:block}
+    .badge{position:absolute; right:14px; bottom:14px; background:#fff; color:var(--secondary); padding:6px 10px; border-radius:999px; border:1px solid #e5e7eb; font-size:12px; font-weight:600}
 
-    /* Sections */
-    .section{max-width:1200px; margin:28px auto; padding:0 20px}
+    /* Section shells */
+    .section{max-width:1200px; margin:18px auto; padding:0 18px}
     .sect-head{display:flex; align-items:flex-end; justify-content:space-between; gap:18px; margin-bottom:10px}
-    .sect-title{font-family:"Playfair Display", serif; font-size:28px}
+    .sect-title{font-family:"Playfair Display", serif; font-size:26px}
     .sect-sub{color:var(--muted); font-size:14px}
 
-    /* Category icons */
-    .icons{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
-    .icon-card{display:flex; align-items:center; gap:12px; padding:14px; border:1px solid #eee; border-radius:16px}
-    .icon{width:36px; height:36px; color:var(--accent)}
-    .icon-card span{font-weight:600}
+    /* Mosaic Gallery (artistic/minimal) */
+    .grid{display:grid; gap:12px}
+    /* columns by breakpoint */
+    @media (max-width:639px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (min-width:640px) and (max-width:959px){ .grid{grid-template-columns:repeat(6,1fr)} }
+    @media (min-width:960px){ .grid{grid-template-columns:repeat(12,1fr)} }
 
-    /* Filter pills */
-    .filters{display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 14px}
-    .pill{padding:8px 12px; border:1px solid #e5e7eb; border-radius:999px; font-weight:600; font-size:13px; cursor:pointer; user-select:none; background:#fff}
-    .pill.active{border-color:var(--secondary); color:#fff; background:var(--secondary)}
+    .tile{
+      position:relative; overflow:hidden; border-radius:18px; background:#f7f7f7;
+      border:1px solid #eee; min-height:160px; display:block;
+    }
+    .tile img{width:100%; height:100%; object-fit:cover; display:block}
 
-    /* Gallery */
-    .grid{display:grid; gap:14px; grid-template-columns:repeat(12,1fr)}
-    .tile{position:relative; overflow:hidden; border-radius:18px; background:#f7f7f7; border:1px solid #eee; min-height:220px; grid-column: span 12; transition:opacity .25s ease, transform .25s ease}
-    .tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .8s cubic-bezier(.2,.6,.2,1)}
-    .tile:hover img{transform:scale(1.04)}
-    .tile.hide{opacity:0; pointer-events:none; transform:scale(.98)}
-    .tagcap{position:absolute; left:10px; bottom:10px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.06); font-size:12px; font-weight:600; color:var(--secondary)}
-    @media (min-width:640px){ .tile.sm-6{grid-column:span 6} .tile.sm-8{grid-column:span 8} .tile.sm-4{grid-column:span 4} }
-    @media (min-width:960px){ .tile.md-3{grid-column:span 3} .tile.md-4{grid-column:span 4} .tile.md-5{grid-column:span 5} .tile.md-6{grid-column:span 6} .hero{grid-template-columns:1.1fr .9fr} }
+    /* Size presets (control only their own space; no stretching) */
+    /* mobile => span 2 cols; larger breakpoints adjust below */
+    .span-12{grid-column:span 12}
+    .span-8{grid-column:span 8}
+    .span-6{grid-column:span 6}
+    .span-4{grid-column:span 4}
+    .span-3{grid-column:span 3}
+    .span-2{grid-column:span 2}
+
+    /* heights for artistic variation */
+    .h-480{height:480px}
+    .h-360{height:360px}
+    .h-300{height:300px}
+    .h-240{height:240px}
+    .h-200{height:200px}
+
+    @media (max-width:639px){
+      .span-12,.span-8,.span-6,.span-4,.span-3,.span-2{grid-column:span 2}
+      .h-480{height:320px}
+    }
+
+    /* Captions */
+    .tagcap{
+      position:absolute; left:10px; bottom:10px; padding:6px 10px; border-radius:999px;
+      background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.06); font-size:12px; font-weight:600; color:var(--secondary)
+    }
+
+    /* Flip-card: “press me” */
+    .flip-area{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+    .flip-card{
+      width:180px; height:110px; perspective:1000px;
+    }
+    .flip-inner{
+      position:relative; width:100%; height:100%; transition:transform .7s cubic-bezier(.2,.7,.2,1);
+      transform-style:preserve-3d; border-radius:14px;
+    }
+    .flip-inner.flip{transform:rotateY(180deg)}
+    .face{
+      position:absolute; inset:0; display:grid; place-items:center; padding:12px; border-radius:14px;
+      backface-visibility:hidden; border:1px solid #e5e7eb;
+    }
+    .face.front{background:#fff; color:var(--secondary); font-weight:700}
+    .face.back{background:linear-gradient(135deg,var(--secondary),var(--accent)); color:#fff; transform:rotateY(180deg); text-align:center; font-size:12px}
+    .press-btn{padding:8px 10px; border-radius:10px; border:1px solid var(--secondary); background:var(--secondary); color:#fff; text-decoration:none; font-weight:600; cursor:pointer}
+    @media (prefers-reduced-motion: reduce){ .flip-inner{transition:none} }
 
     /* Footer */
-    footer{margin-top:42px; border-top:1px solid #eee; background:#fff}
-    .foot-inner{max-width:1200px; margin:auto; padding:22px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
-    .social{display:flex; gap:14px}
-    .social a{width:38px; height:38px; border-radius:999px; display:grid; place-items:center; text-decoration:none; border:1px solid #e5e7eb; color:var(--secondary); transition:.2s ease}
-    .social a:hover{transform:translateY(-2px); box-shadow:0 8px 14px rgba(0,0,0,.08)}
+    footer{margin:40px 0 0; border-top:1px solid #eee; background:#fff}
+    .foot-inner{max-width:1200px; margin:auto; padding:20px 18px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
     .legal{color:var(--muted); font-size:12px}
 
-    /* WhatsApp FAB */
+    /* WhatsApp floating action */
     .wa-fab{position:fixed; right:16px; bottom:16px; width:54px; height:54px; border-radius:50%; display:grid; place-items:center; background:#25D366; color:#fff; box-shadow:0 10px 24px rgba(0,0,0,.18); text-decoration:none; z-index:60}
     .wa-fab svg{width:26px; height:26px}
   </style>
@@ -101,28 +141,65 @@
   <header class="nav" aria-label="Top Navigation">
     <div class="nav-inner">
       <a class="brand" href="#">
-        <!-- If logo.png is missing, the BLP mark still shows -->
         <img class="logo" src="logo.png" alt="BLAPSIS logo" onerror="this.style.display='none'">
-        <div class="mark" aria-hidden="true">BLP</div>
         <div>
           <div class="wordmark">BLAPSIS</div>
           <div class="tag">look up</div>
         </div>
       </a>
-      <a class="cta" href="#gallery">Shop the look</a>
+      <div class="nav-actions">
+        <div class="search" role="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="searchInput" type="search" placeholder="Search denim, hat, dress…" aria-label="Search catalog">
+        </div>
+        <a class="btn primary" href="#gallery">Shop the look</a>
+      </div>
     </div>
   </header>
+
+  <!-- SOCIAL (immediately after header) -->
+  <section class="social-wrap" aria-label="Social links">
+    <div class="handle">Follow us: <strong>Blapsis - BLP</strong></div>
+    <div class="social">
+      <a href="https://www.instagram.com/blapsisblp" target="_blank" rel="noopener" aria-label="Instagram: Blapsis - BLP" title="Instagram — Blapsis - BLP">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/blapsisblp" target="_blank" rel="noopener" aria-label="Facebook: Blapsis - BLP" title="Facebook — Blapsis - BLP">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v3H8v3h3v6h3v-6h3l1-3h-4V9z"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/260973972291?text=Hi%20BLAPSIS%20team,%20I%27d%20love%20to%20order%20from%20your%20collection." target="_blank" rel="noopener" aria-label="WhatsApp chat" title="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M20 12a8 8 0 1 1-14.9 4.1L3 21l4-2.1A8 8 0 1 1 20 12z"/>
+          <path d="M8 9c1 3 4 5 7 6l2-2"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Press-me flip card -->
+    <div class="flip-area">
+      <div class="flip-card" aria-live="polite">
+        <div class="flip-inner" id="flipInner">
+          <div class="face front">
+            <button class="press-btn" id="pressBtn" type="button">press me</button>
+          </div>
+          <div class="face back" id="quoteFace">
+            <!-- quote injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- HERO -->
   <section class="hero">
     <div>
       <div class="h-kicker">New Essentials</div>
       <h1 class="h-title">Elegance in the everyday.</h1>
-      <p class="h-sub">Minimal silhouettes. Elevated fabrics. Crafted for city streets and quiet moments. BLAPSIS is a study in refined simplicity—always inviting you to <strong>look up</strong>.</p>
-      <div class="h-actions">
-        <a class="btn primary" href="#gallery">Explore Collection</a>
-        <a class="btn ghost" href="#icons" aria-label="View categories">Categories</a>
-      </div>
+      <p class="h-sub">Minimal silhouettes. Elevated fabrics. Crafted for city streets and quiet moments. BLAPSIS invites you to <strong>look up</strong>.</p>
     </div>
     <div class="hero-visual" aria-hidden="true">
       <img loading="lazy" src="https://images.unsplash.com/photo-1475178626620-a4d074967452?q=80&w=1600&auto=format&fit=crop" alt="Minimal fashion portrait"/>
@@ -130,80 +207,135 @@
     </div>
   </section>
 
-  <!-- CATEGORIES -->
-  <section id="icons" class="section">
-    <div class="sect-head">
-      <h2 class="sect-title">Categories</h2>
-      <div class="sect-sub">Denims, lingerie, sundresses and hats lead the season.</div>
-    </div>
-    <div class="icons" role="list">
-      <div class="icon-card" role="listitem">
-        <!-- Denims icon -->
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M7 3h10l2 6-4 2v8H9v-8L5 9l2-6z"/>
-        </svg><span>Denims</span>
-      </div>
-      <div class="icon-card" role="listitem">
-        <!-- Lingerie (bralette) -->
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M6 9c1.5-3 2-4 3-4 1 0 1 2 1 4 0 2-1 4-4 5-1 .4-2 1-2 2h16c0-1-1-1.6-2-2-3-1-4-3-4-5 0-2 0-4 1-4 1 0 1.5 1 3 4"/>
-        </svg><span>Lingerie</span>
-      </div>
-      <div class="icon-card" role="listitem">
-        <!-- Sundress -->
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M12 3l3 3-2 2h-2L9 6l3-3zM7 9l10 0 3 9H4l3-9z"/>
-        </svg><span>Sundresses</span>
-      </div>
-      <div class="icon-card" role="listitem">
-        <!-- Hat -->
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <ellipse cx="12" cy="17" rx="9" ry="3"/>
-          <path d="M6 15l2-6h8l2 6M8 9a4 2 0 0 0 8 0"/>
-        </svg><span>Hats</span>
-      </div>
-    </div>
-  </section>
-
   <!-- GALLERY -->
   <section id="gallery" class="section" aria-label="Gallery">
     <div class="sect-head">
       <h2 class="sect-title">Lookbook</h2>
-      <div class="sect-sub">Filter to browse what you love.</div>
-    </div>
-    <div class="filters" aria-label="Filters">
-      <span class="pill active" data-filter="all">All</span>
-      <span class="pill" data-filter="denim">Denims</span>
-      <span class="pill" data-filter="lingerie">Lingerie</span>
-      <span class="pill" data-filter="sundress">Sundresses</span>
-      <span class="pill" data-filter="hat">Hats</span>
+      <div class="sect-sub">Artistic, minimal, and bold where it matters.</div>
     </div>
 
-    <div class="grid">
-      <!-- Tip: replace src with your brand photos when ready -->
+    <div class="grid" id="grid">
+      <!-- BIGGEST: your root image -->
+      <figure class="tile span-12 h-480" data-tags="hero cover 2024">
+        <img src="2024.png" alt="BLAPSIS 2024 showcase">
+        <figcaption class="tagcap">BLAPSIS • 2024</figcaption>
+      </figure>
 
-      <!-- DENIMS -->
-      <figure class="tile sm-6 md-4" data-cat="denim">
+      <!-- Denims -->
+      <figure class="tile span-6 h-360" data-tags="denim jeans jacket blue">
         <img loading="lazy" src="https://images.unsplash.com/photo-1503342217505-b0a15cf70489?q=80&w=1600&auto=format&fit=crop" alt="Classic denim with white tee">
         <figcaption class="tagcap">Denim Classic</figcaption>
       </figure>
-      <figure class="tile sm-6 md-3" data-cat="denim">
+      <figure class="tile span-3 h-240" data-tags="denim jeans">
         <img loading="lazy" src="https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&w=1600&auto=format&fit=crop" alt="Tailored jeans">
         <figcaption class="tagcap">Tailored Jeans</figcaption>
       </figure>
-      <figure class="tile sm-6 md-5" data-cat="denim">
+      <figure class="tile span-3 h-300" data-tags="denim jacket">
         <img loading="lazy" src="https://images.unsplash.com/photo-1548883354-7622d99fec48?q=80&w=1600&auto=format&fit=crop" alt="Denim jacket texture">
         <figcaption class="tagcap">Denim Jacket</figcaption>
       </figure>
 
-      <!-- LINGERIE (tasteful/minimal) -->
-      <figure class="tile sm-6 md-4" data-cat="lingerie">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1520975659190-2f6f2e2d1e0f?q=80&w=1600&auto=format&fit=crop" alt="Soft knit & intimates styling">
-        <figcaption class="tagcap">Soft Intimates</figcaption>
-      </figure>
-      <figure class="tile sm-6 md-3" data-cat="lingerie">
+      <!-- Lingerie (tasteful) -->
+      <figure class="tile span-4 h-300" data-tags="lingerie silk slip">
         <img loading="lazy" src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" alt="Silk slip aesthetic">
         <figcaption class="tagcap">Silk Slip</figcaption>
       </figure>
+      <figure class="tile span-4 h-240" data-tags="lingerie intimates knit">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975659190-2f6f2e2d1e0f?q=80&w=1600&auto=format&fit=crop" alt="Soft knit & intimates styling">
+        <figcaption class="tagcap">Soft Intimates</figcaption>
+      </figure>
+      <figure class="tile span-4 h-240" data-tags="lingerie minimal">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975661595-6453be3f7070?q=80&w=1600&auto=format&fit=crop" alt="Minimal knit tone">
+        <figcaption class="tagcap">Minimal Knit</figcaption>
+      </figure>
 
-      <!-- SUNDRESSES -
+      <!-- Sundresses -->
+      <figure class="tile span-6 h-360" data-tags="sundress summer dress">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1521577352947-9bb58764b69a?q=80&w=1600&auto=format&fit=crop" alt="Light sundress in motion">
+        <figcaption class="tagcap">Summer Sundress</figcaption>
+      </figure>
+      <figure class="tile span-6 h-300" data-tags="sundress monochrome dress">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1472417583565-62e7bdeda490?q=80&w=1600&auto=format&fit=crop" alt="Monochrome dress">
+        <figcaption class="tagcap">Monochrome Dress</figcaption>
+      </figure>
+
+      <!-- Hats -->
+      <figure class="tile span-4 h-240" data-tags="hat straw hat">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?q=80&w=1600&auto=format&fit=crop" alt="Straw hat close-up">
+        <figcaption class="tagcap">Straw Hat</figcaption>
+      </figure>
+      <figure class="tile span-4 h-200" data-tags="hat wide brim">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop" alt="Wide-brim hat">
+        <figcaption class="tagcap">Wide-Brim</figcaption>
+      </figure>
+      <figure class="tile span-4 h-240" data-tags="accessory accessories">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1520975940005-7f3d9a81b6b8?q=80&w=1600&auto=format&fit=crop" alt="Accessories flatlay">
+        <figcaption class="tagcap">Accessories</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-inner">
+      <div style="display:flex; align-items:center; gap:10px">
+        <strong>BLAPSIS</strong><div class="tag">look up</div>
+      </div>
+      <div class="legal">© <span id="year"></span> BLAPSIS. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp floating action -->
+  <a class="wa-fab" href="https://wa.me/260973972291?text=Hi%20BLAPSIS%20team,%20I%27m%20interested%20in%20your%20collection." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.5 3.5A11 11 0 0 0 3 18.9L2 22l3.2-1a11 11 0 1 0 15.3-17.5zM12 19a7 7 0 0 1-3.6-1l-.3-.2-2.2.7.7-2.1-.2-.3A7 7 0 1 1 12 19zm4.1-4.5c-.2-.1-1.3-.6-1.5-.7s-.3-.1-.5.1-.6.7-.7.9c-.1.2-.3.2-.5.1s-1-.4-1.9-1.2c-.7-.6-1.2-1.4-1.4-1.6s0-.3.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.4s-.5-1.2-.7-1.6c-.2-.4-.4-.3-.5-.3h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5.1.2.3.4c.2.2 1.6 2.4 3.9 3.3.5.2.8.3 1 .4.4.1.8.1 1.1.1.3 0 1 0 1.5-.7.5-.7.5-1.2.4-1.3s-.1-.1-.3-.2z"/>
+    </svg>
+  </a>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Search filter (works on captions and data-tags)
+    const searchInput = document.getElementById('searchInput');
+    const tiles = Array.from(document.querySelectorAll('#grid .tile'));
+    const normalize = s => (s||'').toLowerCase().trim();
+    function applySearch(q){
+      const n = normalize(q);
+      tiles.forEach(t=>{
+        const tags = (t.dataset.tags || '') + ' ' + (t.querySelector('figcaption')?.textContent || '');
+        t.style.display = n==='' || normalize(tags).includes(n) ? '' : 'none';
+      });
+    }
+    searchInput.addEventListener('input', e => applySearch(e.target.value));
+    // allow Enter to jump to gallery
+    searchInput.addEventListener('keydown', e => { if(e.key==='Enter'){ document.getElementById('gallery').scrollIntoView({behavior:'smooth'});} });
+
+    // “press me” flip card logic with random quotes
+    const quotes = [
+      "For you: Aesthetic is the whisper that makes form feel inevitable.",
+      "For you: Simplicity is the ultimate elegance.",
+      "For you: Restraint reveals the line that matters.",
+      "For you: Beauty lives where function breathes.",
+      "For you: Space is a material—let it speak."
+    ];
+    const flipInner = document.getElementById('flipInner');
+    const quoteFace = document.getElementById('quoteFace');
+    document.getElementById('pressBtn').addEventListener('click', ()=>{
+      const q = quotes[Math.floor(Math.random()*quotes.length)];
+      quoteFace.textContent = q;
+      flipInner.classList.add('flip');
+      setTimeout(()=> flipInner.classList.remove('flip'), 6000);
+    });
+
+    // Smooth scroll for any in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+</body>
+</html>
